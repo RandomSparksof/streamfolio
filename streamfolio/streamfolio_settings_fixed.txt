@@ -1,1 +1,0 @@
-Settings file generated. Replace your streamfolio/settings.py with the content previously provided.
