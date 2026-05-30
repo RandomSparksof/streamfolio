@@ -1,0 +1,8 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "gunicorn streamfolio.wsgi --bind 0.0.0.0:$PORT --log-file -"
+healthcheckPath = "/admin/"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
