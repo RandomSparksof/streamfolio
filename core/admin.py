@@ -16,21 +16,31 @@ class WatchHistoryAdmin(admin.ModelAdmin):
         'title',
         'service_name',
         'content_type',
+        'genre',
+        'mood',
         'reaction',
         'rating',
+        'would_recommend',
+        'watch_later',
         'watched_at',
         'user',
     )
     list_filter = (
         'service_name',
         'content_type',
+        'genre',
+        'mood',
         'reaction',
         'rating',
+        'would_recommend',
+        'watch_later',
         'watched_at',
     )
     search_fields = (
         'title',
         'service_name',
+        'genre',
         'notes',
+        'recommended_by',
         'user__username',
     )

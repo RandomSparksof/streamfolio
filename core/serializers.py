@@ -12,8 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user
+        return User.objects.create_user(**validated_data)
 
 
 class WatchHistorySerializer(serializers.ModelSerializer):
@@ -32,4 +31,9 @@ class WatchHistorySerializer(serializers.ModelSerializer):
             'reaction',
             'rating',
             'notes',
+            'genre',
+            'mood',
+            'recommended_by',
+            'would_recommend',
+            'watch_later',
         ]
