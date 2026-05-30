@@ -1,4 +1,5 @@
 ﻿from rest_framework import viewsets
+from rest_framework.permissions import AllowAny
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from .models import WatchHistory
@@ -21,7 +22,7 @@ def home(request):
                 color: white;
             }
             .card {
-                max-width: 720px;
+                max-width: 760px;
                 padding: 30px;
                 border-radius: 18px;
                 background: #182235;
@@ -33,17 +34,28 @@ def home(request):
                 margin: 12px 0;
                 font-size: 18px;
             }
+            .status {
+                padding: 10px 14px;
+                background: #064e3b;
+                border-radius: 10px;
+                display: inline-block;
+                margin-bottom: 16px;
+            }
         </style>
     </head>
     <body>
         <div class="card">
+            <div class="status">Backend Running</div>
             <h1>StreamFolio</h1>
-            <p>Your streaming watch history dashboard is running.</p>
+            <p>Your streaming watch-history dashboard backend is live locally.</p>
 
             <h2>Quick Links</h2>
             <a href="/admin/">Django Admin</a>
             <a href="/api/users/">Users API</a>
             <a href="/api/watch-history/">Watch History API</a>
+
+            <h2>What Works Now</h2>
+            <p>You can create users, add watch-history records, and view them through the API.</p>
         </div>
     </body>
     </html>
@@ -54,8 +66,10 @@ def home(request):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
 
 class WatchHistoryViewSet(viewsets.ModelViewSet):
-    queryset = WatchHistory.objects.all()
+    queryset = WatchHistory.objects.all().order_by('-watched_at')
     serializer_class = WatchHistorySerializer
+    permission_classes = [AllowAny]
