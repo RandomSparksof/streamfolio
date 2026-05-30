@@ -12,6 +12,25 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(WatchHistory)
 class WatchHistoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'service_name', 'watched_at', 'user')
-    list_filter = ('service_name', 'watched_at')
-    search_fields = ('title', 'service_name', 'user__username')
+    list_display = (
+        'title',
+        'service_name',
+        'content_type',
+        'reaction',
+        'rating',
+        'watched_at',
+        'user',
+    )
+    list_filter = (
+        'service_name',
+        'content_type',
+        'reaction',
+        'rating',
+        'watched_at',
+    )
+    search_fields = (
+        'title',
+        'service_name',
+        'notes',
+        'user__username',
+    )

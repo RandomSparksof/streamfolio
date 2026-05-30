@@ -1,4 +1,4 @@
-from rest_framework import serializers
+﻿from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .models import WatchHistory
 
@@ -12,11 +12,24 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        return User.objects.create_user(**validated_data)
+        user = User.objects.create_user(**validated_data)
+        return user
 
 
 class WatchHistorySerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+
     class Meta:
         model = WatchHistory
-        fields = ['id', 'user', 'title', 'watched_at', 'service_name']
-        read_only_fields = ['user']
+        fields = [
+            'id',
+            'user',
+            'username',
+            'title',
+            'service_name',
+            'watched_at',
+            'content_type',
+            'reaction',
+            'rating',
+            'notes',
+        ]
